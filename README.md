@@ -120,4 +120,8 @@ Repetam aceleasi proceduri.
  Avem 41897 valori(98%) cu media 2011.
  ![Year](./img/year_hist.png)
 
-(price) year odometer
+Majoritatea sunt dupa anii 1980. Umplem valorile lipsa cu media. Aplicam IQR pentru a scoate outlierele
+
+### Kilometraj(odometer)
+4059 valori(95%) cu media 96225 km si deviatia 184502.
+![Odometer](./img/odometer.png)

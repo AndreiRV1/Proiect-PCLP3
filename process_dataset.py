@@ -5,6 +5,7 @@ df = pd.read_csv("vehicles_trimmed.csv")
 # print(df.head())
 # print(df.describe())
 df = df.drop("id",axis=1)
+df = df.drop("Unnamed: 0",axis=1)
 df = df.drop("url",axis=1)
 df = df.drop("posting_date",axis=1)
 df = df.drop("lat",axis=1)
@@ -71,6 +72,7 @@ df["state"] = df["state"].astype("category").cat.codes
 
 # print(df["description"].info())
 df = df.drop("description",axis=1)
+df = df.drop("model",axis=1)
 
 print(df["title_status"].info())
 print(df["title_status"].nunique())
@@ -101,7 +103,6 @@ plt.savefig('./img/manufacturer.png',format='png')
 # print(df["model"].describe())
 
 df["manufacturer"] = df["manufacturer"].fillna(df["manufacturer"].mode()[0])
-
 df["manufacturer"] = df["manufacturer"].astype("category").cat.codes
 
 
@@ -165,16 +166,48 @@ df["paint_color"] = df["paint_color"].astype("category").cat.codes
 
 
 
-print(df["year"].describe())
+# print(df["year"].head())
 
-df["year"].hist(bins=10,edgecolor="black")
-plt.xlabel('Year')
-plt.ylabel('Frequency')
-plt.title('Histogram of year')
+plt.figure()
+df["year"].hist(bins=10)
+plt.xlabel("Year")
+plt.ylabel("Frequency")
+plt.title("Histogram of Year")
 plt.grid(False)
-plt.show()
-plt.savefig("./img/year_hist.png",format="png")
+
+plt.savefig("./img/year_hist.png", format="png")
+df['year'] = df['year'].fillna(df['year'].mean()) 
+
+Q1 = df['year'].quantile(0.25)
+Q3 = df['year'].quantile(0.75)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+df = df[(df['year'] > lower_bound) & (df['year'] < upper_bound)]
+
+# print(df["odometer"].describe())
+
+Q1 = df['odometer'].quantile(0.25)
+Q3 = df['odometer'].quantile(0.75)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+df = df[(df['odometer'] > lower_bound) & (df['odometer'] < upper_bound)]
+
+plt.figure()
+df["odometer"].hist(bins=1000)
+plt.xlabel("Kms")
+plt.ylabel("Frequency")
+plt.title("Histogram of odometer")
+plt.grid(False)
+
+plt.savefig("./img/odometer.png", format="png")
+df['odometer'] = df['odometer'].fillna(df['odometer'].mean()) 
 
 
 print(df.info())
-# print(df.head())
+print(df.head())
