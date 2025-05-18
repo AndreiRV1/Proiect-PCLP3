@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_csv("vehicles_trimmed.csv")
 # print(df.head())
@@ -207,6 +208,14 @@ plt.grid(False)
 
 plt.savefig("./img/odometer.png", format="png")
 df['odometer'] = df['odometer'].fillna(df['odometer'].mean()) 
+
+df.to_csv("car_cleaned.csv")
+
+correlation_matrix = df.corr()
+
+plt.figure(figsize=(8, 6))  # Set the figure size
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+plt.savefig("./img/corr.png", format="png")
 
 
 print(df.info())
