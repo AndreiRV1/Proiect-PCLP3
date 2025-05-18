@@ -16,7 +16,40 @@ df = df.drop("region_url",axis=1)
 
 df = df.drop("county",axis=1)
 
+df["condition"].value_counts().plot(kind="bar")
+plt.title("Condition distribution")
+plt.xlabel("Condition type")
+plt.ylabel("Number of samples")
+
+plt.savefig('condition.png',format='png')
+plt.show()
+
+df = df.drop("condition",axis=1)
+
+df["cylinders"].value_counts().plot(kind="bar")
+plt.title("Cylinders distribution")
+plt.xlabel("Cylinders")
+plt.ylabel("Number of samples")
+
+plt.savefig('./img/cylinder.png',format='png')
+plt.show()
+
+df = df.drop("cylinders",axis=1)
+
+
+
+df["drive"].value_counts().plot(kind="bar")
+plt.title("Drive distribution")
+plt.xlabel("Drive")
+plt.ylabel("Number of samples")
+
+plt.savefig('./img/drive.png',format='png')
+plt.show()
+
+df["drive"] = df["drive"].fillna(df["drive"].mode()[0])
+df = pd.get_dummies(df, columns=["drive"])
+
+
+
 print(df.info())
 print(df.head())
-print(df["cylinders"].info())
-print(df["condition"].info())

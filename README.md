@@ -37,8 +37,21 @@ Data columns (total 19 columns):
 dtypes: float64(3), int64(2), object(14) 
 ```
 
-Asadar, observam la county ca nu avem intrari, deci eliminam. De asemenea, condition si cylinders au multe valori lipsa(~40%) 
+Asadar, observam la county ca nu avem intrari, deci eliminam. De asemenea, condition si cylinders au multe valori lipsa(~40%).
+
+![Condition](./img/condition.png)
+
+Observam ca valorile sunt concentrate pe good/excelent deci nu putem interpola pentru 40% din valori lipsa. Renuntam la aceasta coloana
+
+![Cylinder](./img/cylinder.png)
 
 
+Acceasi situatie o intalnim si la cylinders, valorile fiind distribuite aproape egal intre 4 6 si 8. Renuntam si la aceasta.
 
+Pentru drive avem ~30% date lipsa.
 
+![Drive](./img/drive.png)
+
+Pentru a umple valorile lipsa vom folosi valoarea predominanta(4wd).Trebuie sa asociem fiecarui label o valoare numarica. Pentru ca sunt caracteristici independete, s-ar potrivi un one-hot encoder.
+
+region (price) year manuf model fuel odometer title_status transmission size type paint_color description state
