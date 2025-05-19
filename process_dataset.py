@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 df = pd.read_csv("vehicles_trimmed.csv")
 # print(df.head())
@@ -211,12 +212,39 @@ df['odometer'] = df['odometer'].fillna(df['odometer'].mean())
 
 df.to_csv("car_cleaned.csv")
 
+
+
+print(df["price"].head())
+print(df["price"].info())
+print(df["price"].describe())
+df['price'] = df['price'].fillna(df['price'].mean()) 
+
+Q1 = df['price'].quantile(0.25)
+Q3 = df['price'].quantile(0.75)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+df = df[(df['price'] > lower_bound) & (df['price'] < upper_bound)]
+
+
+df['price'] = np.log1p(df['price'])
+# print(df.info())
+# print(df.head())
+
 correlation_matrix = df.corr()
 
 plt.figure(figsize=(8, 6))  # Set the figure size
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
 plt.savefig("./img/corr.png", format="png")
+plt.figure(figsize=(8, 6))  # Set the figure size
+
+correlation_matrix = df.corr(method="spearman")
+
+plt.figure(figsize=(8, 6))  # Set the figure size
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+plt.savefig("./img/corr.png", format="png")
+plt.figure(figsize=(8, 6))  # Set the figure size
 
 
-print(df.info())
-print(df.head())

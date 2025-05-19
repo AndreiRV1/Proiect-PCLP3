@@ -145,7 +145,7 @@ Aplicam aceleasi masuri ca la price.
 
 ![Corr](./img/corr.png)
 
-Vedem ca pretul nu este influentat de vreo variabila in mod special, insa
+Vedem ca pretul nu este influentat liniar de vreo variabila in mod special, insa
 exista o corelatie intre an si transmission, una inversa fata de
 incidente(title) si fata de kilometraj.
 
