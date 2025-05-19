@@ -166,8 +166,6 @@ plt.savefig('./img/paint_color.png',format='png')
 df["paint_color"] = df["paint_color"].fillna(df["paint_color"].mode()[0])
 df["paint_color"] = df["paint_color"].astype("category").cat.codes
 
-
-
 # print(df["year"].head())
 
 plt.figure()
@@ -210,13 +208,11 @@ plt.grid(False)
 plt.savefig("./img/odometer.png", format="png")
 df['odometer'] = df['odometer'].fillna(df['odometer'].mean()) 
 
-df.to_csv("car_cleaned.csv")
 
 
-
-print(df["price"].head())
-print(df["price"].info())
-print(df["price"].describe())
+# print(df["price"].head())
+# print(df["price"].info())
+# print(df["price"].describe())
 df['price'] = df['price'].fillna(df['price'].mean()) 
 
 Q1 = df['price'].quantile(0.25)
@@ -228,23 +224,18 @@ upper_bound = Q3 + 1.5 * IQR
 
 df = df[(df['price'] > lower_bound) & (df['price'] < upper_bound)]
 
-
-df['price'] = np.log1p(df['price'])
-# print(df.info())
-# print(df.head())
-
 correlation_matrix = df.corr()
 
 plt.figure(figsize=(8, 6))  # Set the figure size
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
 plt.savefig("./img/corr.png", format="png")
+
+
+# print(df.info())
+# print(df.head())
+
 plt.figure(figsize=(8, 6))  # Set the figure size
-
-correlation_matrix = df.corr(method="spearman")
-
-plt.figure(figsize=(8, 6))  # Set the figure size
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
-plt.savefig("./img/corr.png", format="png")
-plt.figure(figsize=(8, 6))  # Set the figure size
-
-
+sns.scatterplot(x='price', y='year', data=df)
+plt.title('Violin Plot of Total Bill by Day')
+plt.show()
+df.to_csv("car_cleaned.csv")
