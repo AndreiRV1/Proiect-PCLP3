@@ -148,5 +148,4 @@ Aplicam aceleasi masuri ca la price.
 Vedem ca pretul este influentat de year si transmission (proportional) si invers proportional cu kilometraj si fwd.
 
 
-Dintre modele cel mai bun(dupa mean squared error) e linear regression cu eroare de ~8300
-TODO scatter plots
+Dintre modele cel mai bun(dupa mean squared error) e linear regression cu eroare de ~8300.
