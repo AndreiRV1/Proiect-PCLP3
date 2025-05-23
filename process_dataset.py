@@ -2,7 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
-
+from sklearn.preprocessing import LabelEncoder
+import joblib
 
 def plot_text_field(df,name):
     plt.figure(figsize=(8, 6))
@@ -70,7 +71,10 @@ df = df.drop("region",axis=1)
 
 plot_text_field(df,"state")
 # print(df["state"].describe())
-df["state"] = df["state"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['state'])
+df["state"] = le.transform(df['state'])
+joblib.dump(le, './encoders/state_encoder.pkl')
 
 # print(df["title_status"].info())
 # print(df["title_status"].nunique())
@@ -79,7 +83,10 @@ df["state"] = df["state"].astype("category").cat.codes
 plot_text_field(df,"title_status")
 
 df["title_status"] = df["title_status"].fillna(df["title_status"].mode()[0])
-df["title_status"] = df["title_status"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['title_status'])
+df["title_status"] = le.transform(df['title_status'])
+joblib.dump(le, './encoders/title_status_encoder.pkl')
 
 
 df = df.drop("model",axis=1)
@@ -88,22 +95,25 @@ df = df.drop("model",axis=1)
 plot_text_field(df,"manufacturer")
 
 df["manufacturer"] = df["manufacturer"].fillna(df["manufacturer"].mode()[0])
-df["manufacturer"] = df["manufacturer"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['manufacturer'])
+df["manufacturer"] = le.transform(df['manufacturer'])
+joblib.dump(le, './encoders/manufacturer_encoder.pkl')
 
 # print(df["fuel"].describe())
 
 plot_text_field(df,"fuel")
 
 df["fuel"] = df["fuel"].fillna(df["fuel"].mode()[0])
-df["fuel"] = df["fuel"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['fuel'])
+df["fuel"] = le.transform(df['fuel'])
+joblib.dump(le, './encoders/fuel_encoder.pkl')
 
 
 # print(df["size"].describe())
 
 plot_text_field(df,"size")
-
-df["size"] = df["size"].fillna(df["size"].mode()[0])
-df["size"] = df["size"].astype("category").cat.codes
 df = df.drop("size",axis=1)
 
 # print(df["transmission"].describe())
@@ -111,21 +121,30 @@ df = df.drop("size",axis=1)
 plot_text_field(df,"transmission")
 
 df["transmission"] = df["transmission"].fillna(df["transmission"].mode()[0])
-df["transmission"] = df["transmission"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['transmission'])
+df["transmission"] = le.transform(df['transmission'])
+joblib.dump(le, './encoders/transmission_encoder.pkl')
 
 # print(df["type"].describe())
 
 plot_text_field(df,"type")
 
 df["type"] = df["type"].fillna(df["type"].mode()[0])
-df["type"] = df["type"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['type'])
+df["type"] = le.transform(df['type'])
+joblib.dump(le, './encoders/type_encoder.pkl')
 
 # print(df["paint_color"].describe())
 
 plot_text_field(df,"paint_color")
 
 df["paint_color"] = df["paint_color"].fillna(df["paint_color"].mode()[0])
-df["paint_color"] = df["paint_color"].astype("category").cat.codes
+le = LabelEncoder()
+le.fit(df['paint_color'])
+df["paint_color"] = le.transform(df['paint_color'])
+joblib.dump(le, './encoders/paint_color_encoder.pkl')
 
 print(df["year"].describe())
 
