@@ -6,6 +6,7 @@
 
 ### Top-down
 
+[Repo](https://github.com/AndreiRV1/Proiect-PCLP3)
 Am ales sa fac o implementare a unui model de regresie liniara care va avea ca
 date de intrare caracteristicile unei masini si va estima pretul de vanzare.
 
