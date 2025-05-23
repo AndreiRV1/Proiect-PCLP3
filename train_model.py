@@ -1,5 +1,5 @@
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import root_mean_squared_error
+from sklearn.metrics import root_mean_squared_error,accuracy_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 import pandas as pd
@@ -19,7 +19,7 @@ print(2)
 y_pred = model.predict(X_test)
 print(3)
 
-accuracy = root_mean_squared_error(y_test, y_pred)
-print(f"Acuratețea modelului de regresie logistică: {accuracy:.2f}")
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Acuratețea modelului de regresie logistică: {accuracy}")
 
 joblib.dump(model,"model2.pk1")
