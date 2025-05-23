@@ -20,5 +20,5 @@ MANIFEST
 students*
 .venv
 *.zip
-vehicles.csv
-car*.csv
+*.csv
+model*
