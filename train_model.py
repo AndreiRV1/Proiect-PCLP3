@@ -7,6 +7,9 @@ import joblib
 
 
 df = pd.read_csv("car_cleaned.csv")
+df = df.drop("Unnamed: 0",axis=1)
+print(df.info())
+
 
 X = df.drop(columns="price",axis=1)
 y = df["price"]

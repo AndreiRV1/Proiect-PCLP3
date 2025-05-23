@@ -202,5 +202,5 @@ plt.savefig("./img/corr.png", format="png")
 
 relation_numeric(df,'year')
 relation_numeric(df,'odometer')
-
+print(df.info())
 df.to_csv("car_cleaned.csv")
