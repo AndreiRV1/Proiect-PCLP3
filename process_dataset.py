@@ -5,10 +5,8 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 def plot_text_field(df,name):
-    plt.figure()
-    plt.subplots_adjust(bottom=0.15)
-    plt.xticks(rotation=45)
-    plt.tight_layout()  
+    plt.figure(figsize=(8, 6))
+    plt.subplots_adjust(bottom=0.2)
     df[name].value_counts().plot(kind="bar")  
     plt.title(name+" distribution")
     plt.xlabel(name+" type")
@@ -18,7 +16,7 @@ def plot_text_field(df,name):
     plt.close()
     
 def plot_numeric_field(df,name):
-    plt.figure()
+    plt.figure(figsize=(8, 6))
     df[name].hist(bins=10)
     plt.xlabel(name)
     plt.ylabel("Frequency")
@@ -26,6 +24,14 @@ def plot_numeric_field(df,name):
     plt.grid(False)
     plt.savefig("./img/"+name+".png", format="png")
     plt.close()
+    
+def relation_numeric(df,name):
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='price', y=name, data=df)
+    plt.title("Violin Plot of "+name+ "by price")
+    plt.savefig("./img/corr"+name+".png", format="png")
+    plt.close()
+
 
 df = pd.read_csv("vehicles_trimmed.csv")
 df = df.drop("id",axis=1)
@@ -174,8 +180,8 @@ plt.savefig("./img/corr.png", format="png")
 # print(df.info())
 # print(df.head())
 
-plt.figure(figsize=(8, 6))  # Set the figure size
-sns.scatterplot(x='price', y='year', data=df)
-plt.title('Violin Plot of Total Bill by Day')
-# plt.show()
+
+relation_numeric(df,'year')
+relation_numeric(df,'odometer')
+
 df.to_csv("car_cleaned.csv")

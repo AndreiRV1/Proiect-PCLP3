@@ -19,7 +19,4 @@ print(2)
 y_pred = model.predict(X_test)
 print(3)
 
-accuracy = mean_absolute_error(y_test, y_pred)
-print(f"Acuratețea modelului de regresie logistică: {accuracy}")
-
-joblib.dump(model,"model2.pk1")
+joblib.dump(model,"model.pk1")

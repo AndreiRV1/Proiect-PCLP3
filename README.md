@@ -169,3 +169,17 @@ invers proportional cu kilometraj si fwd.
 
 Dintre modele cel mai bun(dupa mean squared error) e linear regression cu
 eroare de ~0.132.
+
+![Corrkms](./img/corryear.png)
+![CorrYear](./img/corrodometer.png)
+
+Nu ne putem da seama de un pattern clar, se poate intui unul liniar la ani, insa vag.
+
+## Antrenarea modelului
+
+Am ales un model de regresie liniara si un split 80/20.
+Acuratete MAE:0.13
+Acuratete RMSE:0.18
+Acuratete R2:0.37
+
+![Residuals](./img/residuals.png)
